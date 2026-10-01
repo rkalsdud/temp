@@ -184,12 +184,44 @@ def run_tests():
           f'{len(r)}명: {[u["name"] for u in r]}', passed)
 
     # =========================================================================
-    # ★ TODO 1 : TE 시나리오 #4 
+    # ★ TODO 1 : TE 시나리오 #...
     # =========================================================================
-    # =========================================================================
-    # ★ TODO 2 : TE 시나리오 #... 
-    # ...
-    # ...
+    r = filter_subscribers(subscribers, search="Premium")
+    names = [u["name"] for u in r]
+    passed = len(r) == 2 and set(names) == {"Kim Minsoo", "Choi Sumin"} and all(
+        u["plan"] == "Premium" for u in r
+    )
+    check("TE-4", '검색창에 "Premium" 입력', "Premium 플랜 사용자만 표시",
+          f'{len(r)}명 {names}', passed)
+
+    r = filter_subscribers(subscribers, status="Active")
+    names = [u["name"] for u in r]
+    passed = len(r) == 3 and set(names) == {"Kim Minsoo", "Lee Jiyoon", "Choi Sumin"} and all(
+        u["status"] == "Active" for u in r
+    )
+    check("TE-5", '상태 필터 "Active" 선택', "Active 사용자만 표시",
+          f'{len(r)}명 {names}', passed)
+
+    r = filter_subscribers(subscribers, status="Expired")
+    names = [u["name"] for u in r]
+    passed = len(r) == 1 and names == ["Jung Hyerin"] and r[0]["status"] == "Expired"
+    check("TE-6", '상태 필터 "Expired" 선택', "Jung Hyerin만 표시",
+          f'{len(r)}명 {names}', passed)
+
+    r = filter_subscribers(subscribers, search="Premium", status="Active")
+    names = [u["name"] for u in r]
+    passed = len(r) == 2 and set(names) == {"Kim Minsoo", "Choi Sumin"} and all(
+        u["plan"] == "Premium" and u["status"] == "Active" for u in r
+    )
+    check("TE-7", '검색어 "Premium" + 상태 필터 "Active" 동시 적용',
+          "Premium 플랜이면서 Active인 사용자만 표시",
+          f'{len(r)}명 {names}', passed)
+
+    r = filter_subscribers(subscribers, search="", status="")
+    names = [u["name"] for u in r]
+    passed = len(r) == len(subscribers)
+    check("TE-8", "검색어 삭제 및 상태 필터 초기화", "전체 목록 복원",
+          f'{len(r)}명 {names}', passed)
 
 
 # =============================================================================
