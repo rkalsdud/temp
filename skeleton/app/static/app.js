@@ -16,14 +16,12 @@ let usageChart = null;
 function badgeClass(value) {
     const v = (value || "").toLowerCase();
 
-    // 매핑 규칙:
-    // Active, Online, Normal   → "badge status-active"   (초록)
-    // Paused, Standby          → "badge status-paused"   (파랑)
-    // Expired, Error, Warning  → "badge status-expired"  (빨강)
-    // Offline                  → "badge status-offline"  (회색)
-    // On, Cleaning             → "badge status-on"       (노랑)
-    // Off                      → "badge status-off"      (연회색)
-    // 그 외                     → "badge"
+    if (v === "active" || v === "online" || v === "normal") return "badge status-active";
+    if (v === "paused" || v === "standby") return "badge status-paused";
+    if (v === "expired" || v === "error" || v === "warning") return "badge status-expired";
+    if (v === "offline") return "badge status-offline";
+    if (v === "on" || v === "cleaning") return "badge status-on";
+    if (v === "off") return "badge status-off";
     return "badge";
 }
 
