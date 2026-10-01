@@ -34,7 +34,12 @@ def get_subscribers():
 # =============================================================================
 @router.get("/subscribers/{user_id}/devices")
 def get_devices_by_user(user_id: str):
-    # 1. subscribers 리스트에서 user_id가 존재하는지 확인
-    # 2. 존재하면 devices_by_user에서 해당 사용자의 디바이스 목록 반환
+     # 1. subscribers 리스트에서 user_id가 존재하는지 확인
+    user_exists = any(sub["userId"] == user_id for sub in subscribers)
+    
     # 3. 존재하지 않으면 HTTPException(status_code=404) 발생
-    pass
+    if not user_exists:
+        raise HTTPException(status_code=404, detail="User not found")
+        
+    # 2. 존재하면 devices_by_user에서 해당 사용자의 디바이스 목록 반환 (가전이 없는 경우 빈 리스트 반환)
+    return devices_by_user.get(user_id, [])
