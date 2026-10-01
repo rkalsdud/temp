@@ -1,0 +1,9 @@
+  [PASS] DEV-01  get_subscribers() 함수 직접 호출
+  [PASS] API-01  GET /api/subscribers 호출
+  [PASS] TE-1  /api/subscribers 호출
+  [PASS] TE-3  검색창에 "Kim" 입력
+  [PASS] TE-4  검색창에 "Premium" 입력
+  [PASS] TE-5  상태 필터 "Active" 선택
+  [PASS] TE-6  상태 필터 "Expired" 선택
+  [PASS] TE-7  검색어 "Premium" + 상태 필터 "Active" 동시 적용
+  [PASS] TE-8  검색어 삭제 및 상태 필터 초기화
