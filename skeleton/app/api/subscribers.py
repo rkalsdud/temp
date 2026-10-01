@@ -17,7 +17,7 @@ router = APIRouter()
 @router.get("/subscribers")
 def get_subscribers():
     # subscribers 리스트 전체를 반환
-    pass
+    return subscribers
 
 # =============================================================================
 # TODO [요구사항 #2]: GET /api/subscribers/{user_id}/devices
